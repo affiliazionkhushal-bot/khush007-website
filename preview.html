@@ -1,0 +1,781 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Khush 007 – Commerce Career Guide</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #0a1628;
+    --blue: #1a56db;
+    --sky: #3b82f6;
+    --mint: #10b981;
+    --gold: #f59e0b;
+    --light: #f0f6ff;
+    --gray: #64748b;
+    --white: #ffffff;
+    --card-bg: #ffffff;
+    --border: #e2e8f0;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--white);
+    color: var(--navy);
+    overflow-x: hidden;
+  }
+
+  /* ── NAVBAR ── */
+  nav {
+    position: fixed; top: 0; width: 100%; z-index: 999;
+    background: rgba(10,22,40,0.97);
+    backdrop-filter: blur(12px);
+    padding: 0 5%;
+    display: flex; align-items: center; justify-content: space-between;
+    height: 68px;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+  }
+  .logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.6rem; font-weight: 900;
+    color: var(--white);
+    letter-spacing: -0.5px;
+  }
+  .logo span { color: var(--gold); }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a {
+    color: rgba(255,255,255,0.75);
+    text-decoration: none;
+    font-size: 0.9rem; font-weight: 500;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--gold); }
+  .nav-cta {
+    background: var(--blue); color: white;
+    padding: 0.5rem 1.3rem; border-radius: 50px;
+    text-decoration: none; font-size: 0.85rem; font-weight: 600;
+    transition: background 0.2s;
+  }
+  .nav-cta:hover { background: var(--sky); }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    background: linear-gradient(135deg, var(--navy) 0%, #0f2244 60%, #0d3060 100%);
+    display: flex; align-items: center;
+    padding: 68px 5% 0;
+    position: relative; overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; top: -20%; right: -10%;
+    width: 600px; height: 600px;
+    background: radial-gradient(circle, rgba(59,130,246,0.18) 0%, transparent 70%);
+    border-radius: 50%;
+  }
+  .hero::after {
+    content: '';
+    position: absolute; bottom: -10%; left: 5%;
+    width: 400px; height: 400px;
+    background: radial-gradient(circle, rgba(16,185,129,0.12) 0%, transparent 70%);
+    border-radius: 50%;
+  }
+  .hero-inner {
+    display: grid; grid-template-columns: 1fr 420px;
+    gap: 4rem; align-items: center;
+    max-width: 1200px; margin: 0 auto; width: 100%;
+    position: relative; z-index: 2;
+  }
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    background: rgba(245,158,11,0.15);
+    border: 1px solid rgba(245,158,11,0.3);
+    color: var(--gold); padding: 0.4rem 1rem; border-radius: 50px;
+    font-size: 0.8rem; font-weight: 600; letter-spacing: 0.5px;
+    margin-bottom: 1.5rem;
+  }
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.4rem, 4.5vw, 3.8rem);
+    color: white; line-height: 1.15;
+    margin-bottom: 1.2rem;
+  }
+  .hero h1 .accent { color: var(--gold); }
+  .hero p {
+    color: rgba(255,255,255,0.7);
+    font-size: 1.05rem; line-height: 1.75;
+    max-width: 500px; margin-bottom: 2.2rem;
+  }
+  .hero-btns { display: flex; gap: 1rem; flex-wrap: wrap; }
+  .btn-primary {
+    background: var(--blue); color: white;
+    padding: 0.85rem 2rem; border-radius: 50px;
+    text-decoration: none; font-weight: 600; font-size: 0.95rem;
+    transition: transform 0.2s, box-shadow 0.2s;
+    box-shadow: 0 4px 20px rgba(26,86,219,0.4);
+  }
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 28px rgba(26,86,219,0.5); }
+  .btn-outline {
+    border: 1.5px solid rgba(255,255,255,0.3); color: white;
+    padding: 0.85rem 2rem; border-radius: 50px;
+    text-decoration: none; font-weight: 500; font-size: 0.95rem;
+    transition: border-color 0.2s, background 0.2s;
+  }
+  .btn-outline:hover { border-color: var(--gold); background: rgba(245,158,11,0.08); }
+
+  /* Profile Card */
+  .profile-card {
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 24px;
+    padding: 2.5rem 2rem;
+    text-align: center;
+    backdrop-filter: blur(20px);
+    animation: float 4s ease-in-out infinite;
+  }
+  @keyframes float {
+    0%,100% { transform: translateY(0); }
+    50% { transform: translateY(-12px); }
+  }
+  .profile-photo {
+    width: 130px; height: 130px;
+    border-radius: 50%;
+    border: 4px solid var(--gold);
+    object-fit: cover; object-position: center top;
+    margin: 0 auto 1.2rem;
+    display: block;
+    background: linear-gradient(135deg, #1a56db, #10b981);
+    /* Replace src below with your actual photo path */
+  }
+  .profile-photo-placeholder {
+    width: 130px; height: 130px;
+    border-radius: 50%;
+    border: 4px solid var(--gold);
+    margin: 0 auto 1.2rem;
+    display: flex; align-items: center; justify-content: center;
+    background: linear-gradient(135deg, #1a56db, #10b981);
+    font-size: 3rem;
+  }
+  .profile-name {
+    font-family: 'Playfair Display', serif;
+    color: white; font-size: 1.3rem; font-weight: 700;
+    margin-bottom: 0.3rem;
+  }
+  .profile-title {
+    color: var(--gold); font-size: 0.82rem;
+    font-weight: 600; letter-spacing: 0.5px;
+    text-transform: uppercase; margin-bottom: 1.2rem;
+  }
+  .profile-tags {
+    display: flex; flex-wrap: wrap; gap: 0.5rem; justify-content: center;
+  }
+  .tag {
+    background: rgba(59,130,246,0.2); color: #93c5fd;
+    padding: 0.3rem 0.75rem; border-radius: 50px;
+    font-size: 0.75rem; font-weight: 500;
+  }
+  .tag.green { background: rgba(16,185,129,0.2); color: #6ee7b7; }
+  .tag.gold { background: rgba(245,158,11,0.2); color: #fcd34d; }
+
+  /* ── STATS ── */
+  .stats-bar {
+    background: var(--light);
+    padding: 2.5rem 5%;
+    border-bottom: 1px solid var(--border);
+  }
+  .stats-inner {
+    max-width: 1200px; margin: 0 auto;
+    display: grid; grid-template-columns: repeat(4,1fr);
+    gap: 1rem; text-align: center;
+  }
+  .stat-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.2rem; font-weight: 700; color: var(--blue);
+  }
+  .stat-label { font-size: 0.82rem; color: var(--gray); font-weight: 500; margin-top: 0.2rem; }
+
+  /* ── SECTION GENERIC ── */
+  section { padding: 5rem 5%; }
+  .section-inner { max-width: 1200px; margin: 0 auto; }
+  .section-tag {
+    display: inline-block;
+    background: rgba(26,86,219,0.1); color: var(--blue);
+    padding: 0.3rem 0.9rem; border-radius: 50px;
+    font-size: 0.78rem; font-weight: 700; letter-spacing: 0.5px;
+    text-transform: uppercase; margin-bottom: 0.8rem;
+  }
+  .section-tag.green { background: rgba(16,185,129,0.1); color: var(--mint); }
+  .section-tag.gold { background: rgba(245,158,11,0.1); color: var(--gold); }
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.8rem, 3vw, 2.6rem);
+    color: var(--navy); margin-bottom: 0.7rem; line-height: 1.2;
+  }
+  .section-sub {
+    color: var(--gray); font-size: 1rem; line-height: 1.7;
+    max-width: 560px; margin-bottom: 3rem;
+  }
+
+  /* ── CAREER CARDS ── */
+  .cards-grid {
+    display: grid; grid-template-columns: repeat(3,1fr);
+    gap: 1.5rem;
+  }
+  .card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 18px; padding: 1.8rem;
+    transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+    cursor: pointer;
+  }
+  .card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 16px 40px rgba(26,86,219,0.12);
+    border-color: var(--sky);
+  }
+  .card-icon {
+    width: 52px; height: 52px; border-radius: 14px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.6rem; margin-bottom: 1rem;
+  }
+  .card-icon.blue { background: rgba(26,86,219,0.1); }
+  .card-icon.green { background: rgba(16,185,129,0.1); }
+  .card-icon.gold { background: rgba(245,158,11,0.1); }
+  .card-icon.purple { background: rgba(139,92,246,0.1); }
+  .card-icon.red { background: rgba(239,68,68,0.1); }
+  .card-icon.teal { background: rgba(20,184,166,0.1); }
+  .card h3 { font-size: 1.05rem; font-weight: 600; margin-bottom: 0.5rem; color: var(--navy); }
+  .card p { font-size: 0.88rem; color: var(--gray); line-height: 1.65; }
+  .card-link {
+    display: inline-flex; align-items: center; gap: 0.3rem;
+    color: var(--blue); font-size: 0.82rem; font-weight: 600;
+    margin-top: 1rem; text-decoration: none;
+    transition: gap 0.2s;
+  }
+  .card-link:hover { gap: 0.6rem; }
+
+  /* ── CAREER PATHS ── */
+  .careers-bg { background: var(--navy); color: white; }
+  .careers-bg .section-title { color: white; }
+  .careers-bg .section-sub { color: rgba(255,255,255,0.65); }
+  .career-grid {
+    display: grid; grid-template-columns: repeat(3,1fr);
+    gap: 1.2rem;
+  }
+  .career-item {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 16px; padding: 1.5rem;
+    transition: background 0.2s, border-color 0.2s;
+  }
+  .career-item:hover {
+    background: rgba(255,255,255,0.09);
+    border-color: var(--gold);
+  }
+  .career-num {
+    font-size: 0.75rem; font-weight: 700; color: var(--gold);
+    letter-spacing: 1px; margin-bottom: 0.5rem;
+  }
+  .career-item h4 { color: white; font-size: 1rem; font-weight: 600; margin-bottom: 0.4rem; }
+  .career-item p { color: rgba(255,255,255,0.55); font-size: 0.82rem; line-height: 1.6; }
+
+  /* ── TIPS ── */
+  .tips-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 1.5rem; }
+  .tip-card {
+    display: flex; gap: 1rem; align-items: flex-start;
+    background: var(--light); border-radius: 16px; padding: 1.5rem;
+    border-left: 4px solid var(--blue);
+  }
+  .tip-card.green { border-color: var(--mint); }
+  .tip-card.gold { border-color: var(--gold); }
+  .tip-card.purple { border-color: #8b5cf6; }
+  .tip-num {
+    min-width: 36px; height: 36px; border-radius: 50%;
+    background: var(--blue); color: white;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.85rem; font-weight: 700;
+  }
+  .tip-card.green .tip-num { background: var(--mint); }
+  .tip-card.gold .tip-num { background: var(--gold); }
+  .tip-card.purple .tip-num { background: #8b5cf6; }
+  .tip-content h4 { font-size: 0.98rem; font-weight: 600; margin-bottom: 0.3rem; color: var(--navy); }
+  .tip-content p { font-size: 0.85rem; color: var(--gray); line-height: 1.6; }
+
+  /* ── SKILLS ── */
+  .skills-list { display: grid; grid-template-columns: repeat(4,1fr); gap: 1rem; }
+  .skill-pill {
+    text-align: center; padding: 1.4rem 1rem;
+    background: white; border: 1px solid var(--border);
+    border-radius: 16px; font-size: 0.88rem; font-weight: 500;
+    color: var(--navy); transition: all 0.2s;
+  }
+  .skill-pill:hover { border-color: var(--blue); color: var(--blue); box-shadow: 0 4px 16px rgba(26,86,219,0.1); }
+  .skill-pill .skill-icon { font-size: 1.8rem; margin-bottom: 0.6rem; display: block; }
+
+  /* ── BLOG ── */
+  .blog-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1.5rem; }
+  .blog-card {
+    border-radius: 18px; overflow: hidden;
+    border: 1px solid var(--border);
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .blog-card:hover { transform: translateY(-4px); box-shadow: 0 12px 32px rgba(0,0,0,0.08); }
+  .blog-img {
+    height: 160px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 3rem;
+  }
+  .blog-body { padding: 1.4rem; }
+  .blog-tag {
+    display: inline-block;
+    padding: 0.25rem 0.7rem; border-radius: 50px;
+    font-size: 0.72rem; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 0.4px;
+    margin-bottom: 0.6rem;
+  }
+  .blog-card h4 { font-size: 0.98rem; font-weight: 600; color: var(--navy); margin-bottom: 0.4rem; line-height: 1.4; }
+  .blog-card p { font-size: 0.82rem; color: var(--gray); line-height: 1.6; }
+  .blog-meta { font-size: 0.75rem; color: #94a3b8; margin-top: 0.8rem; }
+
+  /* ── CONTACT ── */
+  .contact-bg { background: linear-gradient(135deg, #f0f6ff 0%, #e8f5e9 100%); }
+  .contact-inner {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start;
+  }
+  .contact-form { background: white; border-radius: 20px; padding: 2.5rem; box-shadow: 0 4px 24px rgba(0,0,0,0.06); }
+  .form-group { margin-bottom: 1.2rem; }
+  .form-group label { display: block; font-size: 0.85rem; font-weight: 600; color: var(--navy); margin-bottom: 0.4rem; }
+  .form-group input,
+  .form-group textarea,
+  .form-group select {
+    width: 100%; padding: 0.8rem 1rem;
+    border: 1.5px solid var(--border); border-radius: 10px;
+    font-family: 'DM Sans', sans-serif; font-size: 0.9rem; color: var(--navy);
+    background: #f8fafc; outline: none;
+    transition: border-color 0.2s;
+  }
+  .form-group input:focus,
+  .form-group textarea:focus,
+  .form-group select:focus { border-color: var(--blue); background: white; }
+  .form-group textarea { resize: vertical; min-height: 110px; }
+  .btn-submit {
+    width: 100%; background: var(--blue); color: white;
+    padding: 0.9rem; border: none; border-radius: 10px;
+    font-family: 'DM Sans', sans-serif; font-size: 1rem; font-weight: 600;
+    cursor: pointer; transition: background 0.2s;
+  }
+  .btn-submit:hover { background: var(--sky); }
+  .contact-info h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.8rem; color: var(--navy); margin-bottom: 1rem;
+  }
+  .contact-info p { color: var(--gray); font-size: 0.95rem; line-height: 1.7; margin-bottom: 1.5rem; }
+  .info-item { display: flex; gap: 1rem; align-items: flex-start; margin-bottom: 1rem; }
+  .info-icon {
+    width: 40px; height: 40px; min-width: 40px;
+    background: rgba(26,86,219,0.1); border-radius: 10px;
+    display: flex; align-items: center; justify-content: center; font-size: 1rem;
+  }
+  .info-text h5 { font-size: 0.85rem; font-weight: 600; color: var(--navy); }
+  .info-text p { font-size: 0.82rem; color: var(--gray); margin: 0; }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--navy); color: rgba(255,255,255,0.6);
+    padding: 3rem 5% 1.5rem;
+  }
+  .footer-inner {
+    max-width: 1200px; margin: 0 auto;
+    display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 2rem;
+    padding-bottom: 2rem; border-bottom: 1px solid rgba(255,255,255,0.08);
+    margin-bottom: 1.5rem;
+  }
+  .footer-brand .logo { font-size: 1.4rem; }
+  .footer-brand p { font-size: 0.85rem; line-height: 1.7; margin-top: 0.8rem; }
+  .footer-col h5 { color: white; font-size: 0.88rem; font-weight: 600; margin-bottom: 1rem; }
+  .footer-col a { display: block; color: rgba(255,255,255,0.55); font-size: 0.82rem; text-decoration: none; margin-bottom: 0.5rem; transition: color 0.2s; }
+  .footer-col a:hover { color: var(--gold); }
+  .footer-bottom { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; font-size: 0.8rem; }
+
+  /* ── MOBILE ── */
+  @media (max-width: 900px) {
+    .nav-links { display: none; }
+    .hero-inner { grid-template-columns: 1fr; text-align: center; }
+    .profile-card { display: block; max-width: 360px; margin: 0 auto; }
+    .stats-inner { grid-template-columns: repeat(2,1fr); }
+    .cards-grid, .career-grid, .blog-grid { grid-template-columns: 1fr; }
+    .tips-grid { grid-template-columns: 1fr; }
+    .skills-list { grid-template-columns: repeat(2,1fr); }
+    .contact-inner { grid-template-columns: 1fr; }
+    .footer-inner { grid-template-columns: 1fr 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav>
+  <div class="logo">Khush <span>007</span></div>
+  <ul class="nav-links">
+    <li><a href="#learning">Learning</a></li>
+    <li><a href="#careers">Careers</a></li>
+    <li><a href="#tips">Tips</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#blog">Blog</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <a href="#contact" class="nav-cta">Get Guidance</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-inner">
+    <div>
+      <div class="hero-badge">⭐ Commerce Career Guide for Students</div>
+      <h1>Shape Your Future in<br><span class="accent">Commerce & Finance</span></h1>
+      <p>Your trusted guide for commerce concepts, career paths, practical skills, and exam resources — all in one place. From CA to MBA, we've got you covered.</p>
+      <div class="hero-btns">
+        <a href="#careers" class="btn-primary">Explore Careers →</a>
+        <a href="#learning" class="btn-outline">Start Learning</a>
+      </div>
+    </div>
+    <div class="profile-card">
+      <img src="WhatsApp Image 2026-04-20 at 16.19.14.jpeg" alt="Khush" class="profile-photo">
+      <div class="profile-name">Khush</div>
+      <div class="profile-title">Commerce Mentor · Career Guide</div>
+      <div class="profile-tags">
+        <span class="tag">QuickBooks</span>
+        <span class="tag green">Xero</span>
+        <span class="tag gold">MBA Finance</span>
+        <span class="tag">Bookkeeping</span>
+        <span class="tag green">USA · India</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="stats-bar">
+  <div class="stats-inner">
+    <div><div class="stat-num">50+</div><div class="stat-label">Commerce Topics Covered</div></div>
+    <div><div class="stat-num">20+</div><div class="stat-label">Career Paths Explained</div></div>
+    <div><div class="stat-num">100+</div><div class="stat-label">Student Tips & Resources</div></div>
+    <div><div class="stat-num">5★</div><div class="stat-label">Student-Friendly Content</div></div>
+  </div>
+</div>
+
+<!-- LEARNING HUB -->
+<section id="learning">
+  <div class="section-inner">
+    <span class="section-tag">📚 Learning Hub</span>
+    <h2 class="section-title">Commerce Subjects — Simply Explained</h2>
+    <p class="section-sub">Understand accounting, economics, finance, and more with beginner-friendly guides and notes.</p>
+    <div class="cards-grid">
+      <div class="card">
+        <div class="card-icon blue">📊</div>
+        <h3>Accounting Basics</h3>
+        <p>Learn journal entries, ledger, trial balance, P&L, and balance sheet concepts step by step.</p>
+        <a href="#" class="card-link">Read More →</a>
+      </div>
+      <div class="card">
+        <div class="card-icon green">📈</div>
+        <h3>Economics for Commerce</h3>
+        <p>Micro & macro economics explained in simple language with real-world examples.</p>
+        <a href="#" class="card-link">Read More →</a>
+      </div>
+      <div class="card">
+        <div class="card-icon gold">💰</div>
+        <h3>Business Finance</h3>
+        <p>Capital, working capital, budgeting, financial statements — all concepts made easy.</p>
+        <a href="#" class="card-link">Read More →</a>
+      </div>
+      <div class="card">
+        <div class="card-icon purple">🏦</div>
+        <h3>Banking & Taxation</h3>
+        <p>GST, income tax basics, banking operations, and financial instruments explained clearly.</p>
+        <a href="#" class="card-link">Read More →</a>
+      </div>
+      <div class="card">
+        <div class="card-icon red">📣</div>
+        <h3>Marketing Management</h3>
+        <p>Marketing mix, branding, consumer behaviour, and digital marketing for commerce students.</p>
+        <a href="#" class="card-link">Read More →</a>
+      </div>
+      <div class="card">
+        <div class="card-icon teal">🏢</div>
+        <h3>Business Studies</h3>
+        <p>Management, organization, leadership, business environment — chapter-wise notes.</p>
+        <a href="#" class="card-link">Read More →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CAREER PATHS -->
+<section class="careers-bg" id="careers">
+  <div class="section-inner">
+    <span class="section-tag gold">🎯 Career Options</span>
+    <h2 class="section-title">Popular Careers for Commerce Students</h2>
+    <p class="section-sub" style="color:rgba(255,255,255,0.65)">Explore roadmaps for the most in-demand careers in finance, accounting, and business.</p>
+    <div class="career-grid">
+      <div class="career-item">
+        <div class="career-num">01 · Accounting</div>
+        <h4>Chartered Accountant (CA)</h4>
+        <p>India's most prestigious finance certification. Pass CPT, IPCC, and Final exams after 12th commerce.</p>
+      </div>
+      <div class="career-item">
+        <div class="career-num">02 · Company Law</div>
+        <h4>Company Secretary (CS)</h4>
+        <p>Handle legal & corporate compliance. Take CSEET and CS Professional exams through ICSI.</p>
+      </div>
+      <div class="career-item">
+        <div class="career-num">03 · Cost Management</div>
+        <h4>CMA (Cost Accountant)</h4>
+        <p>Specialize in cost management and management accounting through ICMAI certification.</p>
+      </div>
+      <div class="career-item">
+        <div class="career-num">04 · Finance</div>
+        <h4>MBA in Finance</h4>
+        <p>2-year postgraduate degree for finance, investment banking, and corporate finance careers.</p>
+      </div>
+      <div class="career-item">
+        <div class="career-num">05 · Banking</div>
+        <h4>Bank PO / IBPS</h4>
+        <p>Join public and private sector banks through competitive exams. Great career stability and growth.</p>
+      </div>
+      <div class="career-item">
+        <div class="career-num">06 · Global Finance</div>
+        <h4>CFA / ACCA</h4>
+        <p>International finance qualifications ideal for investment analysis and global accounting roles.</p>
+      </div>
+      <div class="career-item">
+        <div class="career-num">07 · Bookkeeping</div>
+        <h4>Accountant / Bookkeeper</h4>
+        <p>Use tools like QuickBooks and Xero for outsourcing work with USA, Australia, and Gulf clients.</p>
+      </div>
+      <div class="career-item">
+        <div class="career-num">08 · Investment</div>
+        <h4>Financial Analyst</h4>
+        <p>Analyze markets, manage portfolios, and guide investment decisions for firms and individuals.</p>
+      </div>
+      <div class="career-item">
+        <div class="career-num">09 · Business</div>
+        <h4>Entrepreneur</h4>
+        <p>Start and manage your own business using your commerce knowledge in accounting and finance.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CAREER TIPS -->
+<section id="tips">
+  <div class="section-inner">
+    <span class="section-tag green">💡 Career Tips</span>
+    <h2 class="section-title">Practical Advice to Succeed</h2>
+    <p class="section-sub">Proven tips to build confidence, crack interviews, and grow in your career.</p>
+    <div class="tips-grid">
+      <div class="tip-card">
+        <div class="tip-num">1</div>
+        <div class="tip-content">
+          <h4>Build a Strong Resume Early</h4>
+          <p>Start documenting your skills, internships, and certifications from Day 1 of college. A clear resume makes you stand out in interviews.</p>
+        </div>
+      </div>
+      <div class="tip-card green">
+        <div class="tip-num">2</div>
+        <div class="tip-content">
+          <h4>Learn Excel & Accounting Software</h4>
+          <p>QuickBooks, Xero, Tally, and advanced Excel are must-have tools for any commerce student entering the workforce.</p>
+        </div>
+      </div>
+      <div class="tip-card gold">
+        <div class="tip-num">3</div>
+        <div class="tip-content">
+          <h4>Do Internships While Studying</h4>
+          <p>Practical experience in CA firms, banks, or finance companies makes your profile significantly stronger for placements.</p>
+        </div>
+      </div>
+      <div class="tip-card purple">
+        <div class="tip-num">4</div>
+        <div class="tip-content">
+          <h4>Improve Communication Skills</h4>
+          <p>Speak clearly, write professionally, and practice interview answers. Technical knowledge alone is not enough today.</p>
+        </div>
+      </div>
+      <div class="tip-card">
+        <div class="tip-num">5</div>
+        <div class="tip-content">
+          <h4>Set Clear Career Goals</h4>
+          <p>Decide early whether you want CA, MBA, banking, or industry. Planning early helps you take the right courses and exams.</p>
+        </div>
+      </div>
+      <div class="tip-card green">
+        <div class="tip-num">6</div>
+        <div class="tip-content">
+          <h4>Stay Updated on Finance News</h4>
+          <p>Read Economic Times, Mint, or BBC Business daily. Current awareness is tested in MBA entrances and banking exams.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills" style="background: var(--light);">
+  <div class="section-inner">
+    <span class="section-tag">🛠️ Skill Development</span>
+    <h2 class="section-title">Skills Every Commerce Student Must Learn</h2>
+    <p class="section-sub">These skills will make you job-ready and help you stand out in the competitive market.</p>
+    <div class="skills-list">
+      <div class="skill-pill"><span class="skill-icon">📊</span>MS Excel & Spreadsheets</div>
+      <div class="skill-pill"><span class="skill-icon">📒</span>QuickBooks Online</div>
+      <div class="skill-pill"><span class="skill-icon">⚡</span>Xero Accounting</div>
+      <div class="skill-pill"><span class="skill-icon">💬</span>Business Communication</div>
+      <div class="skill-pill"><span class="skill-icon">📝</span>Professional Writing</div>
+      <div class="skill-pill"><span class="skill-icon">🎤</span>Public Speaking</div>
+      <div class="skill-pill"><span class="skill-icon">🖥️</span>Digital & IT Skills</div>
+      <div class="skill-pill"><span class="skill-icon">🧠</span>Financial Literacy</div>
+      <div class="skill-pill"><span class="skill-icon">🕐</span>Time Management</div>
+      <div class="skill-pill"><span class="skill-icon">🔍</span>Data Analysis</div>
+      <div class="skill-pill"><span class="skill-icon">🤝</span>Teamwork & Leadership</div>
+      <div class="skill-pill"><span class="skill-icon">🌐</span>GST & Tax Knowledge</div>
+    </div>
+  </div>
+</section>
+
+<!-- BLOG -->
+<section id="blog">
+  <div class="section-inner">
+    <span class="section-tag gold">✍️ Blog & Updates</span>
+    <h2 class="section-title">Latest for Commerce Students</h2>
+    <p class="section-sub">Articles, tips, and updates to keep you ahead in your academic and professional journey.</p>
+    <div class="blog-grid">
+      <div class="blog-card">
+        <div class="blog-img" style="background: linear-gradient(135deg,#dbeafe,#bfdbfe);">🎓</div>
+        <div class="blog-body">
+          <span class="blog-tag" style="background:#dbeafe;color:#1d4ed8;">Career</span>
+          <h4>How to Become a CA in India – Complete Roadmap</h4>
+          <p>Step-by-step guide from 12th Commerce to qualifying the CA Final exam.</p>
+          <div class="blog-meta">📅 April 2025 · 5 min read</div>
+        </div>
+      </div>
+      <div class="blog-card">
+        <div class="blog-img" style="background: linear-gradient(135deg,#d1fae5,#a7f3d0);">💼</div>
+        <div class="blog-body">
+          <span class="blog-tag" style="background:#d1fae5;color:#065f46;">Skills</span>
+          <h4>Top 5 Accounting Software Skills for Freshers in 2025</h4>
+          <p>QuickBooks, Xero, Tally and more — which one should you learn first?</p>
+          <div class="blog-meta">📅 March 2025 · 4 min read</div>
+        </div>
+      </div>
+      <div class="blog-card">
+        <div class="blog-img" style="background: linear-gradient(135deg,#fef3c7,#fde68a);">🌍</div>
+        <div class="blog-body">
+          <span class="blog-tag" style="background:#fef3c7;color:#92400e;">Finance</span>
+          <h4>Outsourcing Accounting Work – USA, Australia & Gulf</h4>
+          <p>How Indian firms are doing bookkeeping outsourcing for international clients.</p>
+          <div class="blog-meta">📅 February 2025 · 6 min read</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact-bg" id="contact">
+  <div class="section-inner">
+    <div class="contact-inner">
+      <div>
+        <span class="section-tag green">✉️ Ask for Advice</span>
+        <div class="contact-info">
+          <h3>Have a Question? We're Here to Help!</h3>
+          <p>Whether you're confused about your career path, struggling with an accounting concept, or need guidance on exams — just ask.</p>
+          <div class="info-item">
+            <div class="info-icon">📧</div>
+            <div class="info-text"><h5>Email</h5><p>khush007@commerceguide.in</p></div>
+          </div>
+          <div class="info-item">
+            <div class="info-icon">📱</div>
+            <div class="info-text"><h5>WhatsApp Support</h5><p>Available for commerce & career queries</p></div>
+          </div>
+          <div class="info-item">
+            <div class="info-icon">🕐</div>
+            <div class="info-text"><h5>Response Time</h5><p>Within 24 hours on weekdays</p></div>
+          </div>
+        </div>
+      </div>
+      <div class="contact-form">
+        <h3 style="font-family:'Playfair Display',serif;font-size:1.4rem;margin-bottom:1.5rem;color:var(--navy);">Ask Your Question</h3>
+        <div class="form-group">
+          <label>Your Name</label>
+          <input type="text" placeholder="e.g. Rahul Sharma">
+        </div>
+        <div class="form-group">
+          <label>Email Address</label>
+          <input type="email" placeholder="your@email.com">
+        </div>
+        <div class="form-group">
+          <label>Topic</label>
+          <select>
+            <option>Select a topic...</option>
+            <option>Career Guidance</option>
+            <option>Accounting / Finance Concept</option>
+            <option>Exam Preparation</option>
+            <option>Skill Development</option>
+            <option>Internship Help</option>
+            <option>Other</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Your Question</label>
+          <textarea placeholder="Write your question or message here..."></textarea>
+        </div>
+        <button class="btn-submit">Send Message 📤</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <div class="logo">Khush <span>007</span></div>
+      <p>Your trusted Commerce Career Guide. Helping students learn, grow, and achieve their career goals in accounting, finance, and business.</p>
+    </div>
+    <div class="footer-col">
+      <h5>Learning</h5>
+      <a href="#">Accounting Basics</a>
+      <a href="#">Economics</a>
+      <a href="#">Finance Concepts</a>
+      <a href="#">Taxation & GST</a>
+      <a href="#">Marketing</a>
+    </div>
+    <div class="footer-col">
+      <h5>Careers</h5>
+      <a href="#">Become a CA</a>
+      <a href="#">CS & CMA</a>
+      <a href="#">MBA Finance</a>
+      <a href="#">Banking Jobs</a>
+      <a href="#">Outsourcing Careers</a>
+    </div>
+    <div class="footer-col">
+      <h5>Resources</h5>
+      <a href="#">Study Notes</a>
+      <a href="#">Career Quiz</a>
+      <a href="#">Resume Templates</a>
+      <a href="#">Exam Tips</a>
+      <a href="#">Ask a Question</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2025 Khush 007 · Commerce Career Guide</span>
+    <span>Made with ❤️ for Commerce Students</span>
+  </div>
+</footer>
+
+</body>
+</html>
